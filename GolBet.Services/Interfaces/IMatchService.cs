@@ -18,5 +18,13 @@ namespace GolBet.Services.Interfaces
 
         Task<MatchDetailDto?> GetDetailAsync(int id);
 
+        Task<MatchFormDto?> GetForEditAsync(int id);
+
+        Task CreateAsync(MatchFormDto dto);
+
+        Task UpdateAsync(MatchFormDto dto);
+
+        Task DeactivateAsync(int id);
+
     }
 }
