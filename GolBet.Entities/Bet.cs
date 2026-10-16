@@ -1,11 +1,7 @@
 ﻿using GolBet.Entities.Common;
 using GolBet.Entities.Enums;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace GolBet.Entities;
 
@@ -41,6 +37,8 @@ public class Bet : AuditableEntity
 
 
 
-    // Module 7 will add:  public string UserId  +  AppUser User 
+    public string UserId { get; set; } = null!;   // FK -> AspNetUsers (string PK) 
+
+    public AppUser User { get; set; } = null!;    // navigation property 
 
 }
