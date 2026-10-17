@@ -18,8 +18,7 @@ public class MatchRepository : GenericRepository<Match>, IMatchRepository
 
 
 
-    public async Task<IEnumerable<Match>> GetAllWithTeamsAsync(MatchStatus? status = null)
-
+    public async Task<IEnumerable<Match>> GetAllWithTeamsAsync(MatchStatus? status = null, string? search = null)
     {
 
         var query = _dbSet
@@ -39,6 +38,9 @@ public class MatchRepository : GenericRepository<Match>, IMatchRepository
         if (status.HasValue)
 
             query = query.Where(m => m.Status == status.Value);
+
+        if (!string.IsNullOrWhiteSpace(search))
+            query = query.Where(m => m.HomeTeam.Name.Contains(search) || m.AwayTeam.Name.Contains(search));
 
 
 
