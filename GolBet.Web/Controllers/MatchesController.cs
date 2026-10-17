@@ -12,8 +12,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GolBet.Web.Controllers;
 
-
-
 public class MatchesController : Controller
 
 {
@@ -22,25 +20,27 @@ public class MatchesController : Controller
 
     private readonly ITeamService _teamService;
 
-    public MatchesController(IMatchService matchService)
+    public MatchesController(IMatchService matchService, ITeamService TeamService)
+    {
 
-        => _matchService = matchService;
+        _matchService = matchService;
 
-
-
+        _teamService = TeamService;
+    }
 
 
     // GET /Matches            -> all matches 
 
-    // GET /Matches?status=Scheduled -> filtered board 
+        // GET /Matches?status=Scheduled -> filtered board 
 
-    public async Task<IActionResult> Index(MatchStatus? status)
+    public async Task<IActionResult> Index(MatchStatus? status, string? search)
 
     {
 
         ViewBag.CurrentStatus = status;
+        ViewBag.Search = search;
 
-        var board = await _matchService.GetBoardAsync(status);
+        var board = await _matchService.GetBoardAsync(status, search);
 
         return View(board);
 
