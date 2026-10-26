@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using GolBet.Entities;
 using GolBet.Services.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace GolBet.Services.Mapping;
 
@@ -40,6 +36,16 @@ public class MappingProfile : Profile
 
         CreateMap<MatchFormDto, Match>().ReverseMap();
 
+
+
+
+        CreateMap<Bet, BetDto>()
+
+               .ForMember(dto => dto.PotentialPayout,
+
+               options => options.MapFrom(bet => bet.Amount * bet.OddsAtPlacement));
+
     }
+
 
 }
